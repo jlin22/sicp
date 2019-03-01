@@ -6,6 +6,9 @@
 		((even? b) (* (double a) (halve b)))
 		(else (+ (* a (- b 1)) a))))
 
+; Exercise 1.18
+; Fast multiplication 
+
 (define (fast-mult a b)
   (define (mult-helper extra a b)
 	(cond ((= b 1) (+ extra a))

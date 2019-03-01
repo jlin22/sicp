@@ -1,0 +1,6 @@
+(define (pascal-triangle level element)
+  (cond ((= element 1) 1)
+		((= element level) 1)
+		((= level 1) 1)
+		(else (+ (pascal-triangle (- level 1) element)
+				 (pascal-triangle (- level 1) (- element 1))))))

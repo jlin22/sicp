@@ -4,7 +4,7 @@
   (start-prime-test n (runtime)))
 
 (define (start-prime-test n start-time)
-  (if (prime? n)
+  (if (fast-prime? n 20)
 	(report-prime (- (runtime) start-time))))
 
 (define (report-prime elapsed-time)
@@ -23,7 +23,12 @@
 (define (smallest-divisor n count)
   (cond ((> (square count) n) n)
 		((divides? count n) count)
-		(else (smallest-divisor n (+ count 1)))))
+		(else (smallest-divisor n (next count)))))
+
+(define (next n)
+  (if (= n 2)
+	3
+	(+ n 2)))
 
 (define (divides? count n)
   (= (remainder n count) 0))
@@ -38,7 +43,7 @@
 (define (fermat-test n)
   (define (try-it a)
 	(= (expmod a n n) a))
-  (try-it (+ 1 (random (- n 1)))))
+  (try-it (+ 1 (floor (random (- n 1))))))
 
 (define (expmod a p n)
   (cond ((= p 0) 1)

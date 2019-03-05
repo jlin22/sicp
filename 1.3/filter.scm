@@ -35,3 +35,14 @@
 
 (define (divides? y x)
   (= (remainder x y) 0))
+
+(define (gcd x y)
+  (if (= y 0)
+	x
+	(gcd y (remainder x y))))
+
+(define (sum-rel-prime n)
+  (filtered-accumulate (rel-prime? n) * 1 identity 1 inc (- n 1)))
+
+(define (rel-prime? n)
+  (lambda (i) (= (gcd n i) 1)))

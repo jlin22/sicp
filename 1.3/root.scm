@@ -13,3 +13,12 @@
   (< (abs (- x y)) 0.01))
 
 (define (average x y) (/ (+ x y) 2.0))
+
+(define (half-interval-method f a b)
+  (let ((a-value (f a))
+		(b-value (f b)))
+	(cond ((and (positive? b-value) (negative? a-value))
+		   (search f a b))
+		  ((and (negative? b-value) (positive? a-value))
+		   (search f b a))
+		  (else (error "Values are not of opposite signs" a b)))))

@@ -41,3 +41,9 @@
 	  1))
   (define (n i) 1.0)
   (+ (cont-frac n d k) 2))
+
+(define (tan-cf x k)
+  (define (n i) (- 0 (expt x i)))
+  (define (d i) (- (* 2.0 i) 1.0))
+  (- 0 (cont-frac n d k)))
+

@@ -1,6 +1,11 @@
 (define (make-rat n d) 
   (let ((g (gcd n d)))
-	(cons (/ n g) (/ d g))))
+	(cons (* (sgn d) (/ n g)) (abs (/ d g)))))
+
+(define (sgn x)
+  (if (< x 0)
+	(- 0 1)
+	1))
 
 (define (numer x) (car x))
 

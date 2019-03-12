@@ -53,3 +53,20 @@
 (define rect1 (make-rect1 (make-point 0 5)
 						  (make-point 5 0)))
 
+(define (make-dims height width) (cons height width))
+
+(define (height-dim d) (car d))
+(define (width-dim d) (cdr d))
+
+(define (make-rect2 top-left height width)
+  (cons top-left (make-dims height width)))
+
+(define (top-left-rect2 r) (car r))
+(define (dim-rect2 r) (cdr r))
+(define (height-rect2 r) (height-dim (dim-rect2 r)))
+(define (width-rect2 r) (width-dim (dim-rect2 r)))
+
+(define (perimeter-rect2 r) (* 2 (+ (height-rect2 r) (width-rect2 r))))
+(define (area-rect2 r) (* (height-rect2 r) (width-rect2 r)))
+
+

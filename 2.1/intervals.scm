@@ -25,3 +25,7 @@
   (make-interval (- (lower-bound x) (upper-bound y))
 				 (- (upper-bound x) (lower-bound y))))
 				
+(define (sub-interval x y)
+  (add-interval x
+				(make-interval (- 0 (upper-bound y))
+							   (- 0 (lower-bound y)))))

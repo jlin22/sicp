@@ -1,8 +1,11 @@
 (define (same-parity first . subsequent)
   (define (helper x l)
-	(cond ((null? l) ())
-		  ((= 0 (remainder (- (car l) x) 2)) 
+	(cond ((null? l) ()) 
+		  ((both-same-parity? x (car l))
 		   (append (list (car l)) (helper x (cdr l))))
 		  (else
 			(helper x (cdr l)))))
-  (append (list first) (helper first subsequent)))
+  (cons first (helper first subsequent)))
+
+(define (both-same-parity? x y)
+  (= 0 (remainder (- x y) 2)))

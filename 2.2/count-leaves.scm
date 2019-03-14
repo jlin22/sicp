@@ -1,0 +1,5 @@
+(define (count-leaves s)
+  (cond ((null? s) 0)
+		((not (pair? s)) 1)
+		(else (+ (count-leaves (car s))
+				 (count-leaves (cdr s))))))

@@ -1,6 +1,0 @@
-(define (for-each proc lst)
-  (if (null? lst)
-      ()
-      ((proc (car lst))
-       (for-each proc (cdr lst)))))
-      

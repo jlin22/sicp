@@ -18,4 +18,31 @@
   (if (null? sequence)
       ()
       (cons (op (car sequence)) (map op (cdr sequence)))))
-      
+
+(define (is-leaf? tree) (not (pair? tree)))
+
+(define (enumerate-tree tree)
+  (cond ((null? tree) ())
+	((is-leaf? tree) (list tree))
+	(else (append (enumerate-tree (car tree))
+		      (enumerate-tree (cdr tree))))))
+
+;; sum odd squares and even fibs
+
+(define (sum-odd-squares n)
+  (accumulate + 0
+	      (filter odd?
+		      (map square
+			   (enumerate-interval 1 n)))))
+
+(define (even-fibs n)
+  (filter even?
+	  (map fib
+	       (enumerate-interval 1 n))))
+
+(define (fib n)
+  (define (fib-helper a b count) ;; count represents which fib number b is
+    (if (= count n)
+	b
+	(fib-helper (+ a b) a (+ count 1))))
+  (fib-helper 1 1 1))

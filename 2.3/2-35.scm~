@@ -5,9 +5,10 @@
 	  (accumulate op init (cdr sequence)))))
 
 (define (count-leaves tree)
+  (display (map tree-leaves tree))
   (accumulate (lambda (x y) (+ y 1))
 	      0
-	      (tree-leaves tree)))
+	      (map tree-leaves tree)))
 
 (define (tree-leaves tree)
   (cond ((null? tree) ())

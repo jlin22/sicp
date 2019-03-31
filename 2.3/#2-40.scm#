@@ -1,0 +1,11 @@
+
+
+(define (enumerate-interval s e)
+  (if (> s e)
+      ()
+      (cons s (enumerate-interval (+ s 1) e))))
+
+(define (accumulate proc init seq)
+  (if (null? seq)
+      init
+      (proc (car seq) (accumulate proc init (cdr seq)))))

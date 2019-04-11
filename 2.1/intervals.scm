@@ -80,3 +80,10 @@
 ; but it's slower because it has redundant checks
 ; if you wanted to implement this 9 cases, do
 ; - +, + +; - -, + +; and - -, - +
+
+(define (make-center-percent center percent)
+  (make-interval (* center (/ (- 1.0 percent) 100.0))
+		 (* center (/ (+ 1.0 percent) 100.0))))
+(define (center interval) (average (lower-bound interval) (upper-bound interval)))
+(define (average x y) (/ (+ x y) 2))
+(define (percent interval) (* 100 (/ (upper-bound interval) center)))

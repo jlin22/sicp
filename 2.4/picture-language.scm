@@ -76,3 +76,28 @@
 (define (scale-vect s v) (make-vect (* s (xcor-vect v))
 				    (* s (ycor-vect v))))
 (define (sub-vect v w) (add-vect v (scale-vect -1 w)))
+
+(define (make-frame origin edge1 edge2)
+  (list origin edge1 edge2))
+(define (origin-frame frame) (car frame))
+(define (edge1-frame frame) (cadr frame))
+(define (edge2-frame frame) (caddr frame))
+
+(define (make-frame origin edge1 edge2)
+  (cons origin (cons edge1 edge2)))
+(define (origin-frame frame) (car frame))
+(define (edge1-frame frame) (cadr frame))
+(define (edge2-frame frame) (cddr frame))
+
+(define (segments->painter segment-list)
+  (lambda (frame)
+    (for-each
+     (lambda (segment)
+       (draw-line
+	((frame-coord-map frame) (start-segment segment))
+	((frame-coord-map frame) (end-segment segment))))
+     segment-list)))
+
+
+
+       

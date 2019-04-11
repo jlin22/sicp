@@ -98,6 +98,34 @@
 	((frame-coord-map frame) (end-segment segment))))
      segment-list)))
 
+(define (make-segment s e)
+  (cons s e))
+(define (start-segment segment)
+  (car segment))
+(define (end-segment segment)
+  (cdr segment))
 
+(define (draw-frame frame)
+  (let ((diagonal (add-vect (edge1-frame frame) (edge2-frame frame))))
+    (segments->painter (list (make-segment (origin-frame frame) (edge1-frame frame))
+			     (make-segment (origin-frame frame) (edge2-frame frame))
+			     (make-segment (edge1-frame frame) diagonal)
+			     (make-segment (edge2-frame frame) diagonal)))))
+(define (draw-X frame)
+  (let ((diagonal (add-vect (edge1-frame frame) (edge2-frame frame))))
+    (segments->painter (list (make-segment (edge1-frame frame) (edge2-frame frame))
+			     (make-segment (origin-frame frame) diagonal)))))
+(define (draw-diamond frame)
+  (let ((diagonal (add-vect (edge1-frame frame) (edge2-frame frame))))
+    (let ((mp1 (scale-vect 0.5 (add-vect (origin-frame frame) (edge1-frame frame))))
+	  (mp2 (scale-vect 0.5 (add-vect (origin-frame frame) (edge2-frame frame))))
+	  (mp3 (scale-vect 0.5 (add-vect (edge2-frame frame) diagonal)))
+	  (mp4 (scale-vect 0.5 (add-vect (edge1-frame frame) diagonal))))
+      (segments->painter (list (make-segment mp1 mp2)
+			       (make-segment mp2 mp3)
+			       (make-segment mp3 mp4)
+			       (make-segment mp4 mp1))))))
+
+			   
 
        
